@@ -19,4 +19,6 @@ class ChallengeModelTest(TestCase):
         challenge = Challenge.objects.get(id=2)
         expected_object_name = f'{challenge.description}'
         self.assertEquals(expected_object_name, 'a description here')
+
+
  

@@ -1,0 +1,21 @@
+#name {
+  color:blue;
+  margin-left:30px;
+
+}
+.card h5 {
+  text-align: center;
+}
+.card {
+  background-color: goldenrod;
+}
+.card input {
+  margin-top:10px;
+  margin-right: 10px;
+}
+.card a:first-child {
+  padding-right:8px;
+  border: 2px;
+  font-weight: bold;
+  background-color: maroon;
+}

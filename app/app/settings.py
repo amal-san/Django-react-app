@@ -78,6 +78,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'app.wsgi.application'
 
 
@@ -131,3 +133,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL =  '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+APPEND_SLASH=False

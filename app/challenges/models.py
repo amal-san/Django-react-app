@@ -2,8 +2,13 @@ from django.db import models
 
 # Create your models here.
 class Challenge(models.Model):
-    name = models.CharField(max_length=50)
-    description = models.CharField(max_length=200)
+    name = models.CharField(max_length=50 )
+    description = models.TextField(max_length=200)
+    file_name = models.CharField(max_length=50)
+    file = models.FileField()
+    flag = models.CharField(max_length=50,null=False)
+    fake_flag = models.CharField(max_length = 50)
+    hint = models.TextField(max_length=200,blank=False)
     class Meta:
         verbose_name = "Challenge"
         verbose_name_plural = "Challenges"
@@ -11,12 +16,19 @@ class Challenge(models.Model):
     def __str__(self):
         return self.name
 
-class File(models.Model):
-    file = models.FileField(blank=False, null=False)
- 
+
+        
+class User(models.Model):
+    name = models.CharField(max_length=60,blank=False)
+    email = models.EmailField(null=False,blank=False)
+    school = models.CharField(max_length=300)
+    dob = models.DateField(auto_now=False,name='date_of_birth')
+    password = models.CharField(max_length=30,blank=False,null=False)
+
+
     class Meta:
-        verbose_name="File"
-        verbose_name_plural="Files"
+        verbose_name="User"
+        verbose_name_plural="Users"
 
     def __str__(self):
-        return self.file.name
+        return self.name

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css'
+import Login from './Components/Login';
+import Click from './Components/Click';
 class App extends Component {
   state = {
     todos: []
@@ -16,7 +18,6 @@ class App extends Component {
       console.log(e);
     }
   }
-
   render() {
     return (
       <div>
@@ -33,9 +34,10 @@ class App extends Component {
                 <p>{item.flag}</p>
                 </div>
                 </div>
-              </div>
-            
+              </div>       
         ))}
+        <Login/>
+        <Click />
       </div>
     );
   }

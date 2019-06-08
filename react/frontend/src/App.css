@@ -1,21 +1,35 @@
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
 #name {
   color:blue;
   margin-left:30px;
 
 }
-.card h5 {
+.cd h5 {
   text-align: center;
 }
-.card {
-  background-color: goldenrod;
+.cd {
+  background-color:#5350ac82;
+  border-style: solid;
 }
-.card input {
+.cd input {
   margin-top:10px;
   margin-right: 10px;
+
 }
-.card a:first-child {
+.cd a:first-child {
   padding-right:8px;
   border: 2px;
   font-weight: bold;
   background-color: maroon;
+}
+#login {
+  background-color: bisque;
+  padding: 150px;
+  text-align: center
+}
+#login input {
+  margin-top:10px;
+}
+.card {
+  display:inline-block;
 }

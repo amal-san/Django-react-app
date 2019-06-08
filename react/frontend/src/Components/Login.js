@@ -1,16 +1,15 @@
 import React from "react"
 import "../App.css"
 
-function Login() {
+function Login(props) {
   return (
-    <div id="login">
-      <form method="get" action="#">
-          <input type="text" name="username"/>
-          <br></br>
-          <input type="text" name="password"/> 
-          <br></br>       
-          <input type="submit" value="submit"/>
-      </form>
+    <div class="card"style={{width:"18rem"}}>
+        <img src="..." class="card-img-top" alt="..."/>
+        <div class="card-body">
+        <h5 class="card-title">{props.title}</h5>
+        <p class="card-text">{props.para}</p>
+        <a href="#" class="btn btn-primary">{props.button}</a>
+        </div>
     </div>
   )
 }

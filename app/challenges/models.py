@@ -4,10 +4,10 @@ from django.db import models
 class Challenge(models.Model):
     name = models.CharField(max_length=50 )
     description = models.TextField(max_length=200)
-    file_name = models.CharField(max_length=50)
-    file = models.FileField()
+    file_name = models.CharField(max_length=50,null=True,blank=True)
+    file = models.FileField(null=True,blank=True)
     flag = models.CharField(max_length=50,null=False)
-    fake_flag = models.CharField(max_length = 50)
+    fake_flag = models.CharField(max_length = 50,null=True,blank=True)
     hint = models.TextField(max_length=200,blank=False)
     class Meta:
         verbose_name = "Challenge"

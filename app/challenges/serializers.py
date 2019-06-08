@@ -8,5 +8,10 @@ class ChallengeSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'description',
+            'file_name',
+            'file',
+            'flag',
+            'hint',
+            'fake_flag'
         )
         model = Challenge

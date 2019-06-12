@@ -12,6 +12,7 @@ class ChallengeSerializer(serializers.ModelSerializer):
             'file',
             'flag',
             'hint',
-            'fake_flag'
+            'fake_flag',
+            'url'
         )
         model = Challenge

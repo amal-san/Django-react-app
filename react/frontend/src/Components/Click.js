@@ -1,6 +1,8 @@
 import React from "react"
+import ReactDOM from "react-dom"
 import "../App.css"
-import Notify from "./Notify"
+import NotifyCorrect from "./NotifyCorrect"
+import NotifyIncorrect from "./NotifyIncorrect"
 
 class Challenge extends React.Component {
   constructor(props)
@@ -14,6 +16,7 @@ class Challenge extends React.Component {
       flag:'',
       id:'',
       hint:'',
+      url:'',
       isDataSet: false
     }
   }
@@ -33,7 +36,7 @@ class Challenge extends React.Component {
 
   {
     //url
-    const url = "http://127.0.0.1:8000/api/1/"
+    const url = "http://127.0.0.1:8000/challenges/1/"
 
     //Request
     fetch(url).then(res => {
@@ -43,6 +46,7 @@ class Challenge extends React.Component {
       else return null;
 
     }).then(data =>{
+      console.log(data)
       if (data!=null) {
         this.setState({
               name:data.name,
@@ -52,6 +56,7 @@ class Challenge extends React.Component {
               flag:data.flag,
               id:data.id,
               hint:data.hint,
+              url:data.url,
               isDataSet:true
         });
       }else {
@@ -74,10 +79,15 @@ class Challenge extends React.Component {
               <a href={this.state.file} class="btn btn-info" style={{display: !this.state.file_name && "none"}}>{this.state.file_name}</a>
               <br></br>
               <input type="text" name="flag" id="check"/>
-              <a class="btn btn-success" onClick={()=>{ if(this.state.flag === document.getElementById("check").value) {
-                alert("Sucess")
-              } }}>Submit</a>
-              <p>{this.state.flag}</p>
+              <a class="btn btn-success" onClick={()=>{ 
+                if(this.state.flag === document.getElementById("check").value) {
+                ReactDOM.render(<NotifyCorrect/>, document.getElementById("notify")); } 
+                if (this.state.flag !== document.getElementById("check").value && document.getElementById("check").value !== null ) {
+                  ReactDOM.render(<NotifyIncorrect />, document.getElementById("notify"));
+                }
+                 }}>Submit</a>
+              <div id="notify"></div>
+              <a href={this.state.url}>Hello</a>
               </div>
               </div>
         </div>):"No results found"
@@ -87,5 +97,4 @@ class Challenge extends React.Component {
 
 
 }
-
 export default Challenge

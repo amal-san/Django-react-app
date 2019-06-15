@@ -33,3 +33,6 @@
 .card {
   display:inline-block;
 }
+#notify {
+  margin-top: 15px;
+}

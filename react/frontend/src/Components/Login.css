@@ -1,0 +1,36 @@
+ {
+    background: goldenrod;
+}
+
+
+#card {
+    width: 350px ;
+    height: 350px;
+    margin-left: auto ;
+    margin-right: auto ;
+    margin-top:150px;
+    background:yellow;
+    align-content: center;
+
+}
+#card input[type=text] {
+    margin-top:40px;
+    margin-left:75px;
+}
+#card input[type=password] {
+
+    margin-top:40px;
+    margin-left:75px
+}
+
+#card h1 {
+    text-align: center;
+    padding-top:20px;
+}
+#card input[type=submit] {
+    margin-left:75px;
+    margin-top:40px;
+    width:205px;
+    background: greenyellow;
+    border: 1px;
+}

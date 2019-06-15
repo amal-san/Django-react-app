@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css'
 import Login from "./Components/Login"
 import Challenge from './Components/Click';
-import Notify from "./Components/Notify"
 class App extends Component {
   state = {
     todos: []
@@ -10,7 +9,7 @@ class App extends Component {
 
   async componentDidMount() {
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/');
+      const res = await fetch('http://127.0.0.1:8000/challenges/1/');
       const todos = await res.json();
       this.setState({
         todos
@@ -19,7 +18,6 @@ class App extends Component {
       console.log(e);
     }
   }
-
   render() {
     return (
       <div>
@@ -38,11 +36,8 @@ class App extends Component {
                 </div>
                 </div>
               </div>
-
         ))}
         <Challenge />
-        <Login title="Amal"para="asdfasdfasdfasdfasdf"button="submit"/>
-        <Login title="Amal"para="asdfasdfasdfasdfasdf"button="submit"/>
         <Login title="Amal"para="asdfasdfasdfasdfasdf"button="submit"/>
       </div>
     );

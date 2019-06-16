@@ -1,6 +1,9 @@
 import React from 'react';
 import './Login.css'
 import Auth from './Auth'
+import { createHashHistory } from 'history'
+
+
 class Login extends React.Component {
 
     constructor() {
@@ -12,6 +15,7 @@ class Login extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.componentWillMount = this.componentWillMount.bind(this);
         this.Auth = new Auth();
     
     }
@@ -49,13 +53,34 @@ class Login extends React.Component {
         });
     }    
     handleClick = () => {
-       this.Auth.login(this.state.user,this.state.pass,this.props.history);
-       console.log(this.props.history)
+       const history = createHashHistory()
+       console.log(history)
+       this.Auth.login(this.state.user,this.state.pass,history);
+
+    }
+    componentWillMount(){
+        const history = createHashHistory()
+        if(this.Auth.loggedIn()){
+            history.push('/home')
+
+        }
+        else {
+            history.push('/')
+        }
+
+    }
+
    
-    
 }
-}
+
 class Home extends React.Component {
+    constructor() {
+        super()
+        this.Auth = new Auth();
+        this.click = this.click.bind(this)
+        this.componentWillMount = this.componentWillMount.bind(this)
+    }
+
     render(){
         return (
             <div>
@@ -65,13 +90,31 @@ class Home extends React.Component {
         )
     }
     click = () => {
-        if(this.Auth.loggedIn())
-        this.props.history.replace('/');
+           const history = createHashHistory()
+           this.Auth.logout();
+           history.push('/')
+
+        }
+    componentWillMount() {
+        if(this.Auth.getProfile() === true){
+        }
         else {
-            this.props.history.push('/login')
+           const history = createHashHistory()
+           history.push('/')
         }
     }
+
+    
          
+}
+class Index extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1>You are in the homepage</h1>
+            </div>
+        )
+    }
 }
 
 
@@ -79,3 +122,4 @@ class Home extends React.Component {
 
 export default Login
 export {Home}
+export {Index}

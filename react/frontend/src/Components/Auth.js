@@ -6,6 +6,7 @@ export default class Auth {
     
     constructor() {
         this.login = this.login.bind(this)
+        this.loggedIn = this.loggedIn.bind(this)
     
        
     
@@ -32,12 +33,9 @@ export default class Auth {
             }));
         }
     }
-    setToken(idToken) {
-        localStorage.setItem('id_token',idToken)
-    }
     checkStatus(e,p) {
         if(e >= 200 && e < 300){
-            
+            console.log(p)
            p.push('/home')
 
         }
@@ -45,11 +43,9 @@ export default class Auth {
             alert("Invaild Username or Password!!")
         }
     }
-    getToken() {
-        localStorage.getItem('id-token')
-    }
     loggedIn() {
         const token = this.getToken()
+        console.log("hello")
         return !!token && !this.isTokenExpired(token)
 
     }
@@ -57,14 +53,27 @@ export default class Auth {
         try {
             const decoded = decode(token);
             if(decoded.exp < Date.now()/1000){
-
+                
             }
             else 
                 return false;
+                
         }
         catch (err){
             return false;
         }
+    }
+    setToken(idToken) {
+        localStorage.setItem('token',idToken)
+    }
+    getToken() {
+        localStorage.getItem('token')
+    }
+    logout() {
+        localStorage.removeItem('token');
+    }
+    getProfile() {
+        return decode(this.getToken());
     }
     
     

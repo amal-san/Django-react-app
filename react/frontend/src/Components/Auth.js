@@ -1,5 +1,3 @@
-
-
 import decode from 'jwt-decode';
 
 export default class Auth {
@@ -26,7 +24,7 @@ export default class Auth {
                     status: response.status
                 })
             ).then(res => {
-                console.log(res.status)
+                console.log(res.data.access,res.status)
                 this.setToken(res.data.access)
                 this.checkStatus(res.status,p)
                 

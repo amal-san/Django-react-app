@@ -15,7 +15,6 @@ class Login extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        this.componentWillMount = this.componentWillMount.bind(this);
         this.Auth = new Auth();
     
     }
@@ -58,17 +57,6 @@ class Login extends React.Component {
        this.Auth.login(this.state.user,this.state.pass,history);
 
     }
-    componentWillMount(){
-        const history = createHashHistory()
-        if(this.Auth.loggedIn()){
-            history.push('/home')
-
-        }
-        else {
-            history.push('/')
-        }
-
-    }
 
    
 }
@@ -78,7 +66,6 @@ class Home extends React.Component {
         super()
         this.Auth = new Auth();
         this.click = this.click.bind(this)
-        this.componentWillMount = this.componentWillMount.bind(this)
     }
 
     render(){
@@ -92,18 +79,10 @@ class Home extends React.Component {
     click = () => {
            const history = createHashHistory()
            this.Auth.logout();
+           console.log(history)
            history.push('/')
 
         }
-    componentWillMount() {
-        if(this.Auth.getProfile() === true){
-        }
-        else {
-           const history = createHashHistory()
-           history.push('/')
-        }
-    }
-
     
          
 }

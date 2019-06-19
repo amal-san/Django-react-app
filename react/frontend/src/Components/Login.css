@@ -1,7 +1,4 @@
- {
-    background: goldenrod;
-}
-
+@import '~@csstools/normalize.css';
 
 #card {
     width: 350px ;

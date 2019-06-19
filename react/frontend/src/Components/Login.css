@@ -6,7 +6,7 @@
     margin-left: auto ;
     margin-right: auto ;
     margin-top:150px;
-    background:yellow;
+    background:#4e79e2;
     align-content: center;
 
 }
@@ -27,7 +27,7 @@
 #card input[type=submit] {
     margin-left:75px;
     margin-top:40px;
-    width:205px;
-    background: greenyellow;
+    width:165px;
+    background: #9ab1e8;
     border: 1px;
 }

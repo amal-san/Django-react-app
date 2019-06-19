@@ -64,6 +64,9 @@ class Login extends React.Component {
 class Home extends React.Component {
     constructor() {
         super()
+        this.state = {
+            user:null
+        }
         this.Auth = new Auth();
         this.click = this.click.bind(this)
     }
@@ -71,7 +74,7 @@ class Home extends React.Component {
     render(){
         return (
             <div>
-                <p>You are logged In</p>
+                <p>You are logged as{this.state.user}</p>
                 <button onClick={this.click.bind(this)}> Logout</button>
             </div>
         )
@@ -79,13 +82,25 @@ class Home extends React.Component {
     click = () => {
            const history = createHashHistory()
            this.Auth.logout();
-           console.log(history)
            history.push('/')
 
         }
+    componentWillMount() {
+        const history = createHashHistory()
+        if(this.Auth.loggedIn()){
+        history.replace('/home');
+            const profile =this.Auth.getProfile()
+            this.setState({
+                user: profile.user_id})}
+        else{ 
+
+            history.push('/');
+            
+        }
+    }
+    }
     
          
-}
 class Index extends React.Component {
     render() {
         return (

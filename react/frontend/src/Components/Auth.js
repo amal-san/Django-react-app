@@ -5,6 +5,7 @@ export default class Auth {
     constructor() {
         this.login = this.login.bind(this)
         this.loggedIn = this.loggedIn.bind(this)
+        this.getToken = this.getToken.bind(this)
     
        
     
@@ -24,7 +25,6 @@ export default class Auth {
                     status: response.status
                 })
             ).then(res => {
-                console.log(res.data.access,res.status)
                 this.setToken(res.data.access)
                 this.checkStatus(res.status,p)
                 
@@ -33,7 +33,6 @@ export default class Auth {
     }
     checkStatus(e,p) {
         if(e >= 200 && e < 300){
-            console.log(p)
            p.push('/home')
 
         }
@@ -41,10 +40,13 @@ export default class Auth {
             alert("Invaild Username or Password!!")
         }
     }
-    loggedIn() {
-        const token = this.getToken()
-        console.log("hello")
-        return !!token && !this.isTokenExpired(token)
+    loggedIn(h) {
+        const token = localStorage.getItem('token')
+        if(token !== null){
+        return !!token && !this.isTokenExpired(token)}
+        else {
+                h.push('/')
+        }
 
     }
     isTokenExpired(token) {
@@ -66,12 +68,33 @@ export default class Auth {
     }
     getToken() {
         localStorage.getItem('token')
+        
     }
     logout() {
         localStorage.removeItem('token');
     }
     getProfile() {
-        return decode(this.getToken());
+        return decode(localStorage.getItem('token'));
+    }
+    fetch(url, options) {
+        // performs api calls sending the required authentication headers
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+
+        // Setting Authorization header
+        // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
+        if (this.loggedIn()) {
+            headers['Authorization'] = 'Bearer ' + this.getToken()
+        }
+
+        return fetch(url, {
+            headers,
+            ...options
+        })
+            .then(this._checkStatus)
+            .then(response => response.json())
     }
     
     

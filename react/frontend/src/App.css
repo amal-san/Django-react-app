@@ -1,4 +1,6 @@
 @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+@import '~@csstools/normalize.css';
+
 #name {
   color:blue;
   margin-left:30px;

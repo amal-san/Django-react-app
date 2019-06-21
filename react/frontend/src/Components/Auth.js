@@ -10,10 +10,10 @@ export default class Auth {
        
     
     }
-    login(username,password,p){
+    login(username,password){
         {
            
-            fetch('http://localhost:8000/api/token/', {
+            return fetch('http://localhost:8000/api/token/', {
                 method: 'post',
                 headers: new Headers({'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -26,28 +26,27 @@ export default class Auth {
                 })
             ).then(res => {
                 this.setToken(res.data.access)
-                this.checkStatus(res.status,p)
+                this.checkStatus(res.status)
+                console.log(res.data)
+                return (this.checkStatus(res.status))
+                
                 
             }));
         }
     }
-    checkStatus(e,p) {
+    checkStatus(e) {
         if(e >= 200 && e < 300){
-           p.push('/home')
+            return true
 
         }
         else{
-            alert("Invaild Username or Password!!")
+            return false
         }
     }
     loggedIn(h) {
         const token = localStorage.getItem('token')
-        if(token !== null){
-        return !!token && !this.isTokenExpired(token)}
-        else {
-                h.push('/')
-        }
-
+        return !!token && !this.isTokenExpired(token)
+       
     }
     isTokenExpired(token) {
         try {
@@ -86,7 +85,7 @@ export default class Auth {
         // Setting Authorization header
         // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
         if (this.loggedIn()) {
-            headers['Authorization'] = 'Bearer ' + this.getToken()
+            headers['Authorization'] = 'Bearer ' + localStorage.getItem('token')
         }
 
         return fetch(url, {

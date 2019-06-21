@@ -11,6 +11,7 @@ class Login extends React.Component {
         this.state = {
             user:'',
             pass:'',
+            isTrue:'',
             redirect:false
         }
         this.handleChange = this.handleChange.bind(this);
@@ -41,6 +42,7 @@ class Login extends React.Component {
                     value="SUBMIT"
                     onClick={this.handleClick.bind(this)}
                 />
+                <p>{this.state.isTrue}</p>
             </div>
             
         )
@@ -53,8 +55,11 @@ class Login extends React.Component {
     }    
     handleClick = () => {
        const history = createHashHistory()
-       console.log(history)
-       this.Auth.login(this.state.user,this.state.pass,history);
+       const access = this.Auth.login(this.state.user,this.state.pass)
+       console.log(access) 
+ 
+
+       
 
     }
 

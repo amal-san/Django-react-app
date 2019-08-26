@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
 import Card from './Components/Card'
+import Banner from './Components/Banner'
 import Nav from './Components/Nav'
+
 class App extends React.Component {
 
   constructor() {
@@ -22,19 +24,20 @@ class App extends React.Component {
   }
 
   handleChange(e) {
-      e.target.value = e.target.value
+      e.target.name = e.target.value
       this.setState({
         input:e.target.value
       })
 
   }
   fetchDetails(inp) {
+    if (inp!== ''){
 
     const url = "https://rickandmortyapi.com/api/character/" + inp
 
 
     fetch(url).then(res => {
-      if(res.status == 200) {
+      if(res.status === 200) {
           return res.json()
       }
       else return null;
@@ -50,7 +53,7 @@ class App extends React.Component {
           });
       }
     });
-  }
+  }}
   handleClick() {
     this.fetchDetails(this.state.input)
   }
@@ -58,7 +61,6 @@ class App extends React.Component {
 
   render() {
     let card = this.state.isDataSet ?
-    <div style ={{flexDirection: 'row',marginLeft:'9rem'}}>
     <Card 
      img={this.state.character.image} 
      name={this.state.character.name} 
@@ -67,20 +69,24 @@ class App extends React.Component {
      species={this.state.character.species}
      origin={this.state.character.origin}
       />
-    </div>:'No results for you try to search with numbers...'
+    :'No results for you try to search with numbers...'
     let loading = 
-      <div className="ui active centered inline loader" style={{marginTop:'15rem'}}>
+      <div className="ui loading segment" style={{marginTop:'15rem'}}>
       </div>
     return (
       <div>
-      <Nav item1='Home' item2='About'/>
-      <div className="ui segment">
-        <div className="ui two column very relaxed grid">
+      <Nav item1='Home' item2='Characters' item3='About'/>
+      <div className='ui vertical segment'>
+          <img src ='https://static3.srcdn.com/wordpress/wp-content/uploads/2018/04/Rick-and-Morty-Season-4-Logo.jpg' alt='image' style={{width:'100%',height:'50%'}}></img>
+      </div>
+      <Banner/>
+      <div className="ui raised segment">
+        <div className="ui two column grid">
           <div className="column">
-          <form className="ui form" style={{padding:'5rem'}}>
+          <form className="ui form">
           <div className="field">
             <label>Search Characters</label>
-            <input type="text" name="input" placeholder="Name" onChange={this.handleChange}/>
+            <input type="text" name="input" placeholder="Name" onChange={this.handleChange} required/>
           </div>
           <button className="ui button" type="button" onClick={this.handleClick}>Submit</button>
           </form>
@@ -88,8 +94,6 @@ class App extends React.Component {
           <div className="column">
           {this.state.isLoading  ? loading:card }
           </div>
-        </div>
-        <div class="ui vertical divider">
         </div>
       </div>
       </div>
